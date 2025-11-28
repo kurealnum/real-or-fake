@@ -4,28 +4,19 @@ import Fake2 from "./assets/fake2.jpg";
 import Fake3 from "./assets/fake3.jpg";
 import { useState } from "react";
 import FinalPage from "./components/final-page";
-import { motion } from "motion/react";
 
 export default function App() {
   const [correct, setCorrect] = useState(0);
-  const [answered, setAnswered] = useState(false);
   const [index, setIndex] = useState(0);
 
-  function isAnsweredCallback(isAnswered: boolean, wasCorrect: boolean) {
+  function isAnsweredCallback(wasCorrect: boolean) {
     if (wasCorrect) {
       setCorrect(correct + 1);
     }
-
-    setAnswered(true);
-  }
-
-  function resetPage() {
-    setAnswered(false);
   }
 
   function nextCallback() {
     setIndex(index + 1);
-    resetPage();
   }
 
   const totalQuestions = 3;

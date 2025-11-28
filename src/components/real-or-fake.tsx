@@ -1,12 +1,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-} from "./ui/dialog";
+import { Dialog, DialogContent, DialogHeader } from "./ui/dialog";
 
 export default function RealOrFake({
   image,
@@ -18,7 +12,7 @@ export default function RealOrFake({
   image: string;
   isReal: boolean;
   text: string;
-  isAnsweredCallback: (arg0: boolean, arg1: boolean) => void;
+  isAnsweredCallback: (arg0: boolean) => void;
   nextCallback: () => void;
 }) {
   const [believesReal, setBelievesReal] = useState(false);
@@ -32,11 +26,11 @@ export default function RealOrFake({
 
     if (believe === "real") {
       setBelievesReal(true);
-      isAnsweredCallback(isAnswered, isReal);
+      isAnsweredCallback(isReal);
     }
     if (believe === "fake") {
       setBelievesFake(true);
-      isAnsweredCallback(isAnswered, !isReal);
+      isAnsweredCallback(!isReal);
     }
   }
 
