@@ -28,6 +28,7 @@ export default function App() {
       text="This image was generated with Google's Nano Banana Pro."
       isAnsweredCallback={isAnsweredCallback}
       nextCallback={nextCallback}
+      imgStyling="max-h-[80vh] w-auto p-4"
     />,
 
     <RealOrFake
@@ -37,6 +38,7 @@ export default function App() {
       text="Another picture generated with Google's Nano Banana Pro model."
       isAnsweredCallback={isAnsweredCallback}
       nextCallback={nextCallback}
+      imgStyling="max-h-[60vh] w-auto p-4"
     />,
 
     <RealOrFake
@@ -46,6 +48,7 @@ export default function App() {
       text="Another picture generated with Google's Nano Banana Pro model."
       isAnsweredCallback={isAnsweredCallback}
       nextCallback={nextCallback}
+      imgStyling="max-h-[70vh] w-auto p-4"
     />,
   ];
 
