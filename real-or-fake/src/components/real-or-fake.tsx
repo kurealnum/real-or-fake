@@ -1,0 +1,101 @@
+import { useState } from "react";
+import { motion } from "motion/react";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+} from "./ui/dialog";
+
+export default function RealOrFake({
+  image,
+  isReal = false,
+  text,
+  isAnsweredCallback,
+  nextCallback,
+}: {
+  image: string;
+  isReal: boolean;
+  text: string;
+  isAnsweredCallback: (arg0: boolean, arg1: boolean) => void;
+  nextCallback: () => void;
+}) {
+  const [believesReal, setBelievesReal] = useState(false);
+  const [believesFake, setBelievesFake] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const isAnswered = believesFake || believesReal;
+
+  function handleAnswer(believe: string) {
+    setIsDialogOpen(true);
+
+    if (believe === "real") {
+      setBelievesReal(true);
+      isAnsweredCallback(isAnswered, isReal);
+    }
+    if (believe === "fake") {
+      setBelievesFake(true);
+      isAnsweredCallback(isAnswered, !isReal);
+    }
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0.5 }}
+      animate={{ opacity: 1, transition: { duration: 1.1 } }}
+      exit={{ opacity: 0.5 }}
+    >
+      <h1 className="text-center my-6">
+        Is this image <b>real</b> or <b>AI generated?</b>
+      </h1>
+      <img src={image} className="h-auto max-w-[300px] w-[70%] mx-auto" />
+      <div className="flex flex-row justify-around items-center my-4 mb-6">
+        <button
+          className="px-8 py-2 bg-green-500 rounded-md"
+          onClick={isAnswered ? () => {} : () => handleAnswer("real")}
+        >
+          <b>Real</b>
+        </button>
+        <button
+          className="px-8 py-2 bg-red-500 rounded-md"
+          onClick={isAnswered ? () => {} : () => handleAnswer("fake")}
+        >
+          <b>Fake</b>
+        </button>
+      </div>
+      {isAnswered && (
+        <Dialog open={isDialogOpen}>
+          <DialogContent className="bg-black/90">
+            <DialogHeader>
+              <span
+                className={
+                  (believesReal ? isReal : !isReal)
+                    ? "text-green-500"
+                    : "text-red-500"
+                }
+              >
+                {believesReal
+                  ? isReal
+                    ? "Correct."
+                    : "Wrong!"
+                  : !isReal
+                    ? "Correct."
+                    : "Wrong!"}
+              </span>
+            </DialogHeader>
+            <div className="flex flex-col gap-2">
+              {believesReal || believesFake ? text : null}
+              <button
+                onClick={nextCallback}
+                className="px-6 py-1.5 bg-gray-500 max-w-[100px] rounded-md mx-auto"
+              >
+                Next
+              </button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
+    </motion.div>
+  );
+}
