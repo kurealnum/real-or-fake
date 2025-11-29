@@ -28,7 +28,8 @@ export default function App() {
       text="This image was generated with Google's Nano Banana Pro."
       isAnsweredCallback={isAnsweredCallback}
       nextCallback={nextCallback}
-      imgStyling="max-h-[80vh] w-auto p-4"
+      imgStyling="max-h-[76vh] w-auto m-8"
+      imgAspectRatio="9/16"
     />,
 
     <RealOrFake
@@ -38,7 +39,8 @@ export default function App() {
       text="Another picture generated with Google's Nano Banana Pro model."
       isAnsweredCallback={isAnsweredCallback}
       nextCallback={nextCallback}
-      imgStyling="max-h-[60vh] w-auto p-4"
+      imgStyling="max-h-[60vh] w-auto m-4"
+      imgAspectRatio="4/3"
     />,
 
     <RealOrFake
@@ -48,7 +50,8 @@ export default function App() {
       text="Another picture generated with Google's Nano Banana Pro model."
       isAnsweredCallback={isAnsweredCallback}
       nextCallback={nextCallback}
-      imgStyling="max-h-[70vh] w-auto p-4"
+      imgStyling="max-h-[70vh] w-auto m-4"
+      imgAspectRatio="9/16"
     />,
   ];
 
@@ -57,7 +60,7 @@ export default function App() {
   }
 
   return (
-    <div className="flex flex-col justify-center h-[100vh]">
+    <div className="flex flex-col justify-center h-[100vh] overflow-clip">
       {screens[index]}
     </div>
   );
