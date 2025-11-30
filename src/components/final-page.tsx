@@ -18,7 +18,7 @@ export default function FinalPage({
       className="flex flex-col justify-center h-[100vh]"
     >
       <div className="w-[90%] max-w-[550px] mx-auto gap-3 flex flex-col">
-        <p className="text-xl mb-16">
+        <p className="text-xl mb-14">
           You guessed correctly on{" "}
           <span
             className={
@@ -38,17 +38,17 @@ export default function FinalPage({
               : "That's pretty impressive, but most people wouldn't be able to answer that accurately."
             : "Isn't this cause for concern?"}
         </p>
-        <p className="mb-16">
+        <p className="mb-14">
           Generative AI is becoming increasingly harder to detect, and large
-          tech companies refuse to do anything about it.
+          tech companies refuse to do anything about it. And the consequences
+          are devastating.
         </p>
-        <p>That's where we come in.</p>
         <p>
-          We're making a platform that treats authenticity as a feature of
-          creation, not an afterthought of moderation.
+          That's why we're making a platform that treats authenticity as a
+          feature of creation, not an afterthought of moderation.
         </p>
         <p>We're always open to chat.</p>
-        <ul className="mb-16">
+        <ul className="mb-14">
           <li>
             <b>Oscar</b> |{" "}
             <a href="mailto:oscar.gaske.cs@gmail.com" className="font-light">
@@ -66,10 +66,8 @@ export default function FinalPage({
           <span className="border-b-secondary border-b-solid border-b-3">
             You
           </span>{" "}
-          don't trust what{" "}
-          <span className="border-b-accent border-b-solid border-b-3">
-            you see
-          </span>
+          don't trust what you{" "}
+          <span className="border-b-accent border-b-solid border-b-3">see</span>
           , do you?
         </p>
       </div>

@@ -2,6 +2,7 @@ import RealOrFake from "./components/real-or-fake";
 import Fake1 from "./assets/fake1.jpg";
 import Fake2 from "./assets/fake2.jpg";
 import Fake3 from "./assets/fake3.jpg";
+import Real1 from "./assets/real1.jpg";
 import { useState } from "react";
 import FinalPage from "./components/final-page";
 
@@ -19,7 +20,7 @@ export default function App() {
     setIndex(index + 1);
   }
 
-  const totalQuestions = 3;
+  const totalQuestions = 4;
   const screens = [
     <RealOrFake
       key={0}
@@ -36,7 +37,7 @@ export default function App() {
       key={1}
       image={Fake2}
       isReal={false}
-      text="Another picture generated with Google's Nano Banana Pro model."
+      text="This was another image generated with Google's Nano Banana Pro model."
       isAnsweredCallback={isAnsweredCallback}
       nextCallback={nextCallback}
       imgStyling="max-h-[60vh] w-auto m-4"
@@ -47,11 +48,22 @@ export default function App() {
       key={2}
       image={Fake3}
       isReal={false}
-      text="Another picture generated with Google's Nano Banana Pro model."
+      text="Another image generated with Google's Nano Banana Pro model. (If you couldn't tell, Nano Banana Pro is one of the best image generation models as of November 2025)"
       isAnsweredCallback={isAnsweredCallback}
       nextCallback={nextCallback}
       imgStyling="max-h-[70vh] w-auto m-4"
       imgAspectRatio="9/16"
+    />,
+
+    <RealOrFake
+      key={3}
+      image={Real1}
+      text="This is just a selfie from unsplash.com."
+      isReal={true}
+      isAnsweredCallback={isAnsweredCallback}
+      nextCallback={nextCallback}
+      imgStyling="max-h-[70vh] w-auto m-4"
+      imgAspectRatio="3/4"
     />,
   ];
 
