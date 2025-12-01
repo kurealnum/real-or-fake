@@ -11,6 +11,7 @@ export default function RealOrFake({
   text,
   isAnsweredCallback,
   nextCallback,
+  doneCallback,
   imgStyling = "",
   imgAspectRatio,
 }: {
@@ -19,6 +20,7 @@ export default function RealOrFake({
   text: string;
   isAnsweredCallback: (arg0: boolean) => void;
   nextCallback: () => void;
+  doneCallback: () => void;
   imgStyling?: string;
   imgAspectRatio: string;
 }) {
@@ -65,7 +67,7 @@ export default function RealOrFake({
       animate={{ opacity: 1, transition: { duration: 1.1 } }}
       exit={{ opacity: 0.5 }}
     >
-      <h1 className="text-center my-6 text-xl md:text-2xl">
+      <h1 className="my-6 text-center text-xl md:text-2xl">
         Is this image{" "}
         <span className="border-b-secondary border-b-solid border-b-4">
           real
@@ -77,26 +79,26 @@ export default function RealOrFake({
         ?
       </h1>
       <div
-        className={imgStyling + ` aspect-[${imgAspectRatio}] w-[100%] mx-auto`}
+        className={imgStyling + ` aspect-[${imgAspectRatio}] mx-auto w-[100%]`}
       >
         <Image
           src={image}
           alt=""
           className={
-            "mx-auto border-white/90 border-solid border-[1.5px] rounded-md " +
+            "mx-auto rounded-md border-[1.5px] border-solid border-white/90 " +
             imgStyling
           }
         />
       </div>
-      <div className="flex flex-row justify-around items-center my-4 mb-6 max-w-[400px] mx-auto">
+      <div className="mx-auto my-4 mb-6 flex max-w-[400px] flex-row items-center justify-around">
         <button
-          className="px-8 py-2 bg-secondary rounded-md text-lg hover:cursor-pointer"
+          className="bg-secondary rounded-md px-8 py-2 text-lg hover:cursor-pointer"
           onClick={isAnswered ? () => {} : () => handleAnswer("real")}
         >
           <b>Real</b>
         </button>
         <button
-          className="px-8 py-2 bg-accent rounded-md text-lg hover:cursor-pointer"
+          className="bg-accent rounded-md px-8 py-2 text-lg hover:cursor-pointer"
           onClick={isAnswered ? () => {} : () => handleAnswer("fake")}
         >
           <b>Fake</b>
@@ -109,8 +111,8 @@ export default function RealOrFake({
               <DialogTitle
                 className={
                   (believesReal ? isReal : !isReal)
-                    ? "text-green-500 " + " text-center font-bold text-xl"
-                    : "text-red-500" + " text-center font-bold text-xl"
+                    ? "text-green-500 " + " text-center text-xl font-bold"
+                    : "text-red-500" + " text-center text-xl font-bold"
                 }
               >
                 {believesReal
@@ -124,12 +126,20 @@ export default function RealOrFake({
             </DialogHeader>
             <div className="flex flex-col gap-2">
               {believesReal || believesFake ? text : null}
-              <button
-                onClick={nextCallback}
-                className="px-6 py-1.5 bg-card max-w-[100px] rounded-md mx-auto border-white/30 border-solid border-2 mt-2 hover:cursor-pointer"
-              >
-                Next
-              </button>
+              <div className="mx-auto flex flex-row gap-10">
+                <button
+                  onClick={nextCallback}
+                  className="bg-card mx-auto mt-2 max-w-[100px] rounded-md border-2 border-solid border-white/30 px-6 py-1.5 hover:cursor-pointer"
+                >
+                  Next
+                </button>
+                <button
+                  onClick={doneCallback}
+                  className="bg-card mx-auto mt-2 rounded-md border-2 border-solid border-white/30 px-6 py-1.5 text-nowrap hover:cursor-pointer"
+                >
+                  I&apos;m done
+                </button>
+              </div>
             </div>
           </DialogContent>
         </Dialog>
