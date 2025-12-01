@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { Dialog, DialogContent, DialogHeader } from "./ui/dialog";
+import { StaticImageData } from "next/image";
+import Image from "next/image";
 
 export default function RealOrFake({
   image,
@@ -11,7 +13,7 @@ export default function RealOrFake({
   imgStyling = "",
   imgAspectRatio,
 }: {
-  image: string;
+  image: StaticImageData;
   isReal: boolean;
   text: string;
   isAnsweredCallback: (arg0: boolean) => void;
@@ -29,12 +31,16 @@ export default function RealOrFake({
     setIsDialogOpen(true);
 
     if (believe === "real") {
+      const isCorrect = isReal;
+
       setBelievesReal(true);
-      isAnsweredCallback(isReal);
+      isAnsweredCallback(isCorrect);
     }
     if (believe === "fake") {
+      const isCorrect = !isReal;
+
       setBelievesFake(true);
-      isAnsweredCallback(!isReal);
+      isAnsweredCallback(isCorrect);
     }
   }
 
@@ -58,8 +64,9 @@ export default function RealOrFake({
       <div
         className={imgStyling + ` aspect-[${imgAspectRatio}] w-[100%] mx-auto`}
       >
-        <img
+        <Image
           src={image}
+          alt=""
           className={
             "mx-auto border-white/90 border-solid border-[1.5px] rounded-md " +
             imgStyling

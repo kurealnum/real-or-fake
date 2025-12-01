@@ -1,12 +1,13 @@
-import RealOrFake from "./components/real-or-fake";
-import Fake1 from "./assets/fake1.jpg";
-import Fake2 from "./assets/fake2.jpg";
-import Fake3 from "./assets/fake3.jpg";
-import Real1 from "./assets/real1.jpg";
+"use client";
+import RealOrFake from "@app/components/real-or-fake";
+import Fake1 from "@public/fake1.jpg";
+import Fake2 from "@public/fake2.jpg";
+import Fake3 from "@public/fake3.jpg";
+import Real1 from "@public/real1.jpg";
 import { useState } from "react";
-import FinalPage from "./components/final-page";
+import FinalPage from "@app/components/final-page";
 
-export default function App() {
+export default function Page() {
   const [correct, setCorrect] = useState(0);
   const [index, setIndex] = useState(0);
 
