@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { Dialog, DialogContent, DialogHeader } from "./ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import { StaticImageData } from "next/image";
 import Image from "next/image";
+import { saveResponse } from "@app/lib/entries";
 
 export default function RealOrFake({
   image,
@@ -33,11 +34,25 @@ export default function RealOrFake({
     if (believe === "real") {
       const isCorrect = isReal;
 
+      const filename = image.src;
+      const seen = localStorage.getItem(filename) === "seen";
+      if (!seen) {
+        saveResponse(isCorrect, filename).then(() => {});
+        localStorage.setItem(filename, "seen");
+      }
+
       setBelievesReal(true);
       isAnsweredCallback(isCorrect);
     }
     if (believe === "fake") {
       const isCorrect = !isReal;
+
+      const filename = image.src;
+      const seen = localStorage.getItem(filename) === "seen";
+      if (!seen) {
+        saveResponse(isCorrect, filename).then(() => {});
+        localStorage.setItem(filename, "seen");
+      }
 
       setBelievesFake(true);
       isAnsweredCallback(isCorrect);
@@ -91,7 +106,7 @@ export default function RealOrFake({
         <Dialog open={isDialogOpen}>
           <DialogContent className="bg-card border-white/20 [&>button:last-child]:hidden">
             <DialogHeader>
-              <h2
+              <DialogTitle
                 className={
                   (believesReal ? isReal : !isReal)
                     ? "text-green-500 " + " text-center font-bold text-xl"
@@ -105,7 +120,7 @@ export default function RealOrFake({
                   : !isReal
                     ? "Correct."
                     : "Wrong!"}
-              </h2>
+              </DialogTitle>
             </DialogHeader>
             <div className="flex flex-col gap-2">
               {believesReal || believesFake ? text : null}
